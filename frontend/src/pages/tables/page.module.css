@@ -1,19 +1,35 @@
-.tablePageContainer{
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
+.tablePageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
-.tablesContainer{
-    display: flex;
-    gap: 1em;
+.tablesContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1em;
 }
 
-.tableContainer{
-    background-color: #004643;
-    width: fit-content;
-    color: #faf0ca;
-    padding: 0.5em;
-    border-radius: 0.3em;
-    cursor: pointer;
+.tableContainer {
+  background-color: #004643;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  color: #faf0ca;
+  padding: 0.5em;
+  border-radius: 0.3em;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .tablesContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .tablesContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

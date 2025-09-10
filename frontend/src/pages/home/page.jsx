@@ -1,5 +1,9 @@
 import styles from "./page.module.css";
 
 export default function Home() {
-    return (<h1>Home</h1>)
+  return (
+    <div className={`pageContainer`}>
+      <h1>Home</h1>
+    </div>
+  );
 }

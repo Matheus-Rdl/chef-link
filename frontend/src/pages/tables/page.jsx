@@ -22,16 +22,19 @@ export default function Tables() {
     <div className={`${styles.tablePageContainer} pageContainer`}>
       <h1>Tables</h1>
       {tablesList.length > 0 ? (
-        <div className={styles.tablesContainer}>
-          {tablesList.map((table) => (
-            <Link to={`/orders/${table._id}`}>
-              <div key={table._id} className={styles.tableContainer}>
-                <p>Mesa: {table.tableNumber}</p>
-                <p>Quant. de pessoas: {table.quantity}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <>
+          <button>Adicionar mesa</button>
+          <div className={styles.tablesContainer}>
+            {tablesList.map((table) => (
+              <Link to={`/orders/${table._id}`} key={table._id}>
+                <div className={styles.tableContainer}>
+                  <p>Mesa: {table.tableNumber}</p>
+                  <p>Quant. de pessoas: {table.quantity}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </>
       ) : (
         <div>You do not have tables yet</div>
       )}
