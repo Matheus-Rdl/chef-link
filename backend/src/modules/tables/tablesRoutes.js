@@ -1,5 +1,5 @@
 import express from "express";
-import TablesControllers from "../controllers/tables.js";
+import TablesControllers from "./tablesControllers.js";
 
 const tablesRouter = express.Router()
 

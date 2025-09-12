@@ -3,10 +3,10 @@ import cors from "cors"; // Import CORS to allow cross-origin requests
 import { config } from "dotenv"; // Import dotenv to load environment variables
 import { Mongo } from "./database/mongo.js"; // Import custom MongoDB connection module
 import authRouter from "./auth/auth.js";
-import usersRouter from "./routes/users.js";
-import platesRouter from "./routes/plates.js";
-import tablesRouter from "./routes/tables.js";
-import ordersRouter from "./routes/orders.js";
+import usersRouter from "./modules/users/usersRoutes.js";
+import platesRouter from "./modules/plates/platesRoutes.js";
+import tablesRouter from "./modules/tables/tablesRoutes.js";
+import ordersRouter from "./modules/orders/ordersRoutes.js";
 
 config(); // Load environment variables from .env into process.env
 
@@ -43,10 +43,10 @@ async function main() {
 
   // Routes
   app.use("/auth", authRouter);
-  app.use('/users', usersRouter);
-  app.use('/plates', platesRouter);
-  app.use('/tables', tablesRouter);
-  app.use('/orders', ordersRouter);
+  app.use("/users", usersRouter);
+  app.use("/plates", platesRouter);
+  app.use("/tables", tablesRouter);
+  app.use("/orders", ordersRouter);
 
   // Start the server and listen on the defined port
   app.listen(port, () => {

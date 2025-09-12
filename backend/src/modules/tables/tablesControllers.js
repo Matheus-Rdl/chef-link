@@ -1,5 +1,5 @@
-import TablesDataAccess from '../dataAccess/tables.js'
-import { ok, serverError } from '../helpers/httpResponse.js'
+import TablesDataAccess from './tablesDataAccess.js'
+import { ok, serverError } from '../../helpers/httpResponse.js'
 
 export default class TablesControllers {
     constructor() {

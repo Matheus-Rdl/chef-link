@@ -1,5 +1,5 @@
 import express from "express";
-import PlatesControllers from "../controllers/plates.js";
+import PlatesControllers from "./platesControllers.js";
 
 const platesRouter = express.Router()
 

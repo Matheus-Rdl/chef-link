@@ -1,4 +1,4 @@
-import { Mongo } from "../database/mongo.js";
+import { Mongo } from "../../database/mongo.js";
 import { ObjectId } from "mongodb";
 
 const collectionName = 'tables'
