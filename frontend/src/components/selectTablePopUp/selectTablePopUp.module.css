@@ -1,0 +1,28 @@
+.popUpContainer{
+    padding: 1em 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tablesContainer{
+    padding: 1em;
+    margin: .5em;
+    border: 3px #004643 solid;
+    border-radius: .8em;
+    width: 100%;
+}
+
+.tableContainer{
+    color: #faf0ca;
+    background-color: #004643;
+    margin: .5em;
+    width: fit-content;
+    padding: 1em;
+    border-radius: .5em;
+    cursor: pointer;
+}
+
+.popUpContainer button {
+    width: 60%;
+}

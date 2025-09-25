@@ -22,8 +22,39 @@ export default function useTable() {
         if (result.success) {
           setTablesList(result.body);
         } else {
-          console.log(result);
+          //console.log(result);
         }
+      })
+      .catch((error) => {
+        //console.log(error);
+      })
+      .finally(() => {
+        setTableLoading(false);
+      });
+  };
+
+  const AddTable = (userId, table, numPerson, tableData) => {
+    setTableLoading(true);
+
+    fetch(`${url}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        userId: userId,
+        tableNumber: table,
+        quantity: parseInt(numPerson)
+      })
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        //if (result.success) {
+        //  setTablesList(result.body);
+        //} else {
+        console.log(result);
+        //}
       })
       .catch((error) => {
         console.log(error);
@@ -33,5 +64,5 @@ export default function useTable() {
       });
   };
 
-  return { getTablesList, tablesList, refetchTables, tableLoading };
+  return { getTablesList, tablesList, refetchTables, tableLoading, AddTable };
 }

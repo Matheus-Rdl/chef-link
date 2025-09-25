@@ -7,10 +7,10 @@ export default function usePlates() {
 
   const url = "http://localhost:3001/plates";
 
-  const getAvailablePlates = (userId) => {
+  const getPlates = (userId) => {
     setPlatesLoading(true);
 
-    fetch(`${url}/availables`, {
+    fetch(`${url}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -22,11 +22,11 @@ export default function usePlates() {
         if (result.success) {
           setPlatesList(result.body);
         } else {
-          console.log(result);
+          //console.log(result);
         }
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       })
       .finally(() => {
         setPlatesLoading(false);
@@ -34,5 +34,5 @@ export default function usePlates() {
       });
   };
 
-  return { getAvailablePlates, platesLoading, refetchPlates, platesList };
+  return { getPlates, platesLoading, refetchPlates, platesList };
 }

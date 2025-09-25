@@ -13,7 +13,7 @@ export default function Orders() {
     }
   }, [refetchOrders]);
 
-  console.log(ordersList);
+  ////console.log(ordersList);
 
   return (
     <div className={`${styles.orderPageContainer} pageContainer`}>

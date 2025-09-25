@@ -16,7 +16,7 @@ export default function Tables() {
     return <h1>Loading...</h1>;
   }
 
-  console.log(tablesList);
+  ////console.log(tablesList);
 
   return (
     <div className={`${styles.tablePageContainer} pageContainer`}>

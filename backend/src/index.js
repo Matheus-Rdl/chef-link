@@ -24,7 +24,7 @@ async function main() {
   });
 
   // Print the connection result (success message or error)
-  console.log(mongoConnection);
+  //console.log(mongoConnection);
 
   // Middleware to parse JSON bodies in requests
   app.use(express.json());
@@ -50,7 +50,7 @@ async function main() {
 
   // Start the server and listen on the defined port
   app.listen(port, () => {
-    console.log(`Server running on: http://${hostname}:${port}`);
+    //console.log(`Server running on: http://${hostname}:${port}`);
   });
 }
 

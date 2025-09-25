@@ -22,11 +22,11 @@ export default function useOrder() {
         if (result.success) {
           setOrdersList(result.body);
         } else {
-          console.log(result);
+          //console.log(result);
         }
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       })
       .finally(() => {
         setOrderLoading(false);

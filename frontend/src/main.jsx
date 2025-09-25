@@ -9,6 +9,7 @@ import Profile from "./pages/profile/page.jsx";
 import Auth from "./pages/auth/page.jsx";
 import Tables from "./pages/tables/page.jsx";
 import Orders from "./pages/orders/page.jsx";
+import NewOrder from "./pages/newOrder/page.jsx";
 
 const pages = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const pages = createBrowserRouter([
       { path: "/profile", element: <Profile /> },
       { path: "/auth", element: <Auth /> },
       { path: "/tables", element: <Tables /> },
+      { path: "/new-order", element: <NewOrder/> },
       { path: "/orders/:tableId", element: <Orders /> },
     ],
   },

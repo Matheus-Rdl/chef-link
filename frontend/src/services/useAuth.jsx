@@ -24,10 +24,10 @@ export default function useAuth() {
             JSON.stringify({ token: result.body.token, user: result.body.user })
           );
         }
-        console.log(result);
+        //console.log(result);
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       })
       .finally(() => {
         setAuthLoading(false);
@@ -38,5 +38,5 @@ export default function useAuth() {
     localStorage.removeItem("auth");
   };
 
-  return { login, logout , authLoading };
+  return { login, logout, authLoading };
 }
