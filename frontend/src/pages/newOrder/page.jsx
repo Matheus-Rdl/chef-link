@@ -2,16 +2,26 @@ import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import usePlates from "../../services/usePlates";
 import Loading from "../loading/page";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import OrderProductCard from "../../components/orderProductCard/orderProductCard";
+import useOrder from "../../services/useOrder";
+import { RiCloseCircleFill } from "react-icons/ri";
+import NavSideBar from "../../components/navSideBar/navSideBar";
+import { FaLess, FaRegArrowAltCircleLeft } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 
 export default function NewOrder() {
   const { getPlates, platesList, platesLoading, refetchPlates } = usePlates();
+  const { addOrder } = useOrder();
   const location = useLocation();
-  const { table, numPerson } = location.state || {};
+  const { tableId, table, numPerson } = location.state || {};
   const [selectedItems, setSelectedItems] = useState([]);
+  const authData = JSON.parse(localStorage.getItem("auth"));
+  const navigate = useNavigate(); //negação entre telas
+  const [screenProducts, setScreenProducts] = useState("Principais"); //o que vai ser mostrado nos menus dos produtos
+  const [btnCart, useBtnCart] = useState(false);
 
-  ////console.log(table, numPerson);
+  console.log(tableId)
 
   //leva uma mensagem para o services, a função getAvailablePlates
   useEffect(() => {
@@ -38,6 +48,20 @@ export default function NewOrder() {
     }
   };
 
+  //Altera de tela em tela dos produtos quando clica em um item
+  const handleSelect = (products) => {
+    setScreenProducts(products);
+  };
+
+  //Função para voltar a tela
+  const handleBack = () => {
+    navigate(-1);
+  };
+
+  const handleMenuCart = () => {
+    useBtnCart(!btnCart);
+  };
+
   // Função para saber se o produto está selecionado
   const isChecked = (id) => selectedItems.some((item) => item.id === id);
 
@@ -61,16 +85,31 @@ export default function NewOrder() {
 
   //COnfirma o pedido
   const handleConfirmOrder = (orderData) => {
-    console.log(orderData)
+    addOrder(authData.user._id, tableId, orderData);
     setSelectedItems([]);
+    navigate("/");
   };
 
   return (
-    <div className={`pageContainer`}>
+    <div className={styles.pageContainer}>
+      <FaRegArrowAltCircleLeft
+        className={styles.arrowBack}
+        onClick={handleBack}
+      />
+      <FaShoppingCart className={styles.btnCart} onClick={handleMenuCart} />
       <h1>Novo pedido</h1>
       <div className={styles.newOrderInformation}>
         <h3>Mesa: {table}</h3>
         <h3>Pessoas: {numPerson}</h3>
+      </div>
+      <div className={styles.menuItems}>
+        {["Principais", "Bebidas", "Sobremesas", "Adicionais", "Outros"].map(
+          (item) => (
+            <div key={item} onClick={() => handleSelect(item)}>
+              <p>{item}</p>
+            </div>
+          )
+        )}
       </div>
       <div>
         <div className={styles.cardProductsBox}>
@@ -86,9 +125,19 @@ export default function NewOrder() {
           ))}
         </div>
 
-        <div className={styles.cartContainer}>
+        <div
+          className={
+            btnCart
+              ? `${styles.cartContainer} ${styles.cartContainerOpen}`
+              : `${styles.cartContainer} ${styles.cartContainerClose}`
+          }
+        >
           <h4>Produtos selecionados</h4>
           <ul className={styles.cartContent}>
+            <RiCloseCircleFill
+              className={styles.closeCart}
+              onClick={handleMenuCart}
+            />
             {selectedItems.length === 0 && <p>Nenhum item selecionado.</p>}
             {selectedItems.map((item, index) => (
               <li key={index}>
@@ -108,12 +157,24 @@ export default function NewOrder() {
             ))}
           </ul>
           <div className={styles.cartButtons}>
-            <button onClick={() => handleConfirmOrder(selectedItems)}>
+            <button
+              disabled={selectedItems.length === 0}
+              onClick={() => handleConfirmOrder(selectedItems)}
+            >
               Lançar Pedido
             </button>
             <button>Ver lançamentos</button>
           </div>
         </div>
+
+        <div
+          className={
+            btnCart
+              ? `${styles.cartBackground} ${styles.cartBackgroundOpen}`
+              : `${styles.cartBackground} ${styles.cartBackgroundClose}`
+          }
+          onClick={handleMenuCart}
+        />
       </div>
     </div>
   );

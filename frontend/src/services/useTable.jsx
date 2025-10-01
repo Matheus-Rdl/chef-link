@@ -33,10 +33,11 @@ export default function useTable() {
       });
   };
 
-  const AddTable = (userId, table, numPerson, tableData) => {
-    setTableLoading(true);
+const AddTable = async (userId, table, numPerson) => {
+  setTableLoading(true);
 
-    fetch(`${url}`, {
+  try {
+    const response = await fetch(`${url}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,24 +46,26 @@ export default function useTable() {
       body: JSON.stringify({
         userId: userId,
         tableNumber: table,
-        quantity: parseInt(numPerson)
-      })
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        //if (result.success) {
-        //  setTablesList(result.body);
-        //} else {
-        console.log(result);
-        //}
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setTableLoading(false);
-      });
-  };
+        quantity: parseInt(numPerson),
+      }),
+    });
+
+    const result = await response.json();
+    console.log("Resultado AddTable:", result);
+
+    if (result.success) {
+      return result.body; // 👈 agora retorna a mesa criada (com o _id)
+    } else {
+      throw new Error(result.message || "Erro ao criar mesa");
+    }
+  } catch (error) {
+    console.error("Erro no AddTable:", error);
+    throw error;
+  } finally {
+    setTableLoading(false);
+  }
+};
+
 
   return { getTablesList, tablesList, refetchTables, tableLoading, AddTable };
 }

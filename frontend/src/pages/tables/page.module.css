@@ -12,7 +12,7 @@
 
 .tableContainer {
   background-color: #004643;
-  width: 80%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   gap: 0.7em;
@@ -26,10 +26,16 @@
   .tablesContainer {
     grid-template-columns: repeat(3, 1fr);
   }
+  .tableContainer {
+    font-size: x-large;
+  }
 }
 
 @media screen and (max-width: 500px) {
   .tablesContainer {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .tableContainer {
+    font-size: large;
   }
 }

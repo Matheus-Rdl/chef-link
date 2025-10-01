@@ -1,28 +1,61 @@
-.popUpContainer{
-    padding: 1em 2em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.popUpContainer {
+  padding: 1em 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.tablesContainer{
-    padding: 1em;
-    margin: .5em;
-    border: 3px #004643 solid;
-    border-radius: .8em;
-    width: 100%;
+.tablesContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 1em;
+  margin: 0.5em;
+  border: 3px #004643 solid;
+  border-radius: 0.8em;
+  width: 100%;
+  max-height: 350px;
+  overflow-y: auto;
+  gap: 0.8em;
+  align-items: center;
+  justify-content: center;
 }
 
-.tableContainer{
-    color: #faf0ca;
-    background-color: #004643;
-    margin: .5em;
-    width: fit-content;
-    padding: 1em;
-    border-radius: .5em;
-    cursor: pointer;
+.tableContainer {
+  color: #faf0ca;
+  background-color: #004643;
+  width: 100;
+  padding: 1em;
+  border-radius: 0.5em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
 }
 
 .popUpContainer button {
-    width: 60%;
+  width: 60%;
+}
+
+/* Smartphones médios (até ~768px) */
+@media screen and (max-width: 768px) {
+  .tablesContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .popUpContainer h1 {
+    font-size: x-large;
+    text-align: center;
+  }
+}
+
+/* Smartphones médios (até ~768px) */
+@media screen and (max-width: 400px) {
+  .tablesContainer {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .popUpContainer h1 {
+    font-size: large;
+  }
 }

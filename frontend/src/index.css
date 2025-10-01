@@ -35,6 +35,33 @@ p{
 
 .pageContainer{
   padding: 0.5em;
+  padding-left: 80px;
+  padding-top: 92px;
 }
+
+/* Smartphones pequenos (até ~480px) */
+@media screen and (max-width: 480px) {}
+
+/* Smartphones médios (até ~768px) */
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: xx-large;
+  }
+    h3 {
+    font-size: x-large;
+  }
+  h4 {
+    font-size: large;
+  }
+}
+
+/* Tablets (até ~1024px) */
+@media screen and (max-width: 1024px) {}
+
+/* Laptops pequenos (até ~1280px) */
+@media screen and (max-width: 1280px) {}
+
+/* Desktops grandes (até ~1536px ou mais) */
+@media screen and (max-width: 1536px) {}
 
 

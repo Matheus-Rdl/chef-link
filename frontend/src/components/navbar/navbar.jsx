@@ -23,7 +23,7 @@ export default function NavBar() {
           <img className={styles.logo} src="/logo.png" alt="" />
         </div>
         <div className={styles.navbarItems}>
-          <LuMenu className={styles.navbarIcons} onClick={handleOpenMenu} />
+          {/*<LuMenu className={styles.navbarIcons} onClick={handleOpenMenu} />*/}
         </div>
       </nav>
 

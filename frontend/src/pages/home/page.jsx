@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./page.module.css";
 import OrderPopUp from "../../components/orderPopUp/orderPopUp";
 import SelectTablePopUp from "../../components/selectTablePopUp/selectTablePopUp";
+import NavSideBar from "../../components/navSideBar/navSideBar";
 
 export default function Home() {
   const [selectTable, setSelectTable] = useState(null);
@@ -17,6 +18,7 @@ export default function Home() {
   return (
     <div className={`pageContainer`}>
       <>
+        <NavSideBar/>
         <h1>Home</h1>
         <button
           onClick={() => {

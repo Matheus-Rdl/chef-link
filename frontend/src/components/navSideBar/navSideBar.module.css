@@ -1,0 +1,23 @@
+.navSideBar {
+  height: 100%;
+  position: fixed;
+  width: 68px;
+  background-color: #004643;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 116px;
+  gap: 1em;
+  align-items: center;
+}
+
+
+.navbarLink {
+  color: #faf0ca;
+  display: flex;
+  gap: 0.3em;
+  transition: 0.3s;
+  font-size: xx-large;
+}

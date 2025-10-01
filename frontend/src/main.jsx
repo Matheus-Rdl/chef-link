@@ -22,7 +22,7 @@ const pages = createBrowserRouter([
       { path: "/auth", element: <Auth /> },
       { path: "/tables", element: <Tables /> },
       { path: "/new-order", element: <NewOrder/> },
-      { path: "/orders/:tableId", element: <Orders /> },
+      { path: "/orders/:tableId/:quantity", element: <Orders /> },
     ],
   },
 ]);

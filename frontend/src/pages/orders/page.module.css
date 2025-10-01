@@ -1,0 +1,33 @@
+.ordersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.orderCard{
+  background-color: #004643;
+  color: #faf0ca;
+  padding: 1em .3em;
+  width: 40%;
+  border-radius: .3em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.orderName{
+  width: 55%;
+  border-right: #faf0ca 3px solid;
+  padding-right: 5%;
+}
+
+.orderQuantity{
+  width: 10%;
+  text-align: center;
+}
+
+.orderPrice{
+  border-left: #faf0ca 3px solid;
+  width: 25%;
+  padding-left: 5%;
+}

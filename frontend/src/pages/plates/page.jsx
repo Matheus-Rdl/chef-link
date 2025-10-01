@@ -3,6 +3,7 @@ import usePlates from "../../services/usePlates";
 import styles from "./page.module.css";
 import Loading from "../loading/page";
 import PlateCard from "../../components/plateCard/plateCard";
+import NavSideBar from "../../components/navSideBar/navSideBar";
 
 export default function Plates() {
   const { getPlates, platesList, platesLoading, refetchPlates } = usePlates();
@@ -23,6 +24,7 @@ export default function Plates() {
 
   return (
     <div className={`pageContainer`}>
+      <NavSideBar/>
       <div className={styles.cardPlatesBox}>
         {platesList.map((plate) => (
           <div key={plate._id} className={styles.cardContainer}>

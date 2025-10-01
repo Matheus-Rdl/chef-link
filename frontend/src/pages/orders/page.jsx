@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import styles from "./page.module.css";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import useOrder from "../../services/useOrder";
+import NavSideBar from "../../components/navSideBar/navSideBar";
 
 export default function Orders() {
   const { tableId } = useParams();
@@ -13,17 +14,56 @@ export default function Orders() {
     }
   }, [refetchOrders]);
 
-  ////console.log(ordersList);
+  // 📌 Calcular total de todas as orders
+  const totalPrice = useMemo(() => {
+    return ordersList.reduce((accOrder, order) => {
+      return (
+        accOrder +
+        order.orderItems.reduce((accItem, item) => {
+          return accItem + (item.itemDetails[0]?.price || 0);
+        }, 0)
+      );
+    }, 0);
+  }, [ordersList]);
+
+  console.log(ordersList);
 
   return (
     <div className={`${styles.orderPageContainer} pageContainer`}>
+      <NavSideBar />
       <h1>Orders</h1>
-      <h4>{tableId}</h4>
+
+      {/* Total geral */}
+      <div className={styles.totalContainer}>
+        <h3>Total: R$ {totalPrice}</h3>
+      </div>
+
       {ordersList.length > 0 ? (
-        <div className={styles.ordersContainer}></div>
+        <div className={styles.ordersContainer}>
+          {ordersList.map((order) => (
+            <div className={styles.orderCard}>
+              <p>{order.pickupStatus}</p>
+              {order.orderItems.map((items) => (
+                <div key={items._id}>
+                  <p>
+                    <span className={styles.orderName}>
+                      {items.itemDetails[0].name}
+                    </span>
+                    <span className={styles.orderQuantity}>
+                      {items.quantity}
+                    </span>
+                    <span className={styles.orderPrice}>
+                      R$ {items.itemDetails[0].price}
+                    </span>
+                  </p>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       ) : (
         <div>
-          <p>You do not have orders yet</p>
+          <p>Você não tem pedidos ainda!</p>
         </div>
       )}
     </div>

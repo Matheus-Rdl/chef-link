@@ -25,8 +25,10 @@ export default function SelectTablePopUp({ onClose }) {
   //Abre o novo produto sem criar uma mesa
   const openNewOrder = (table) => {
     // Navega para a página NewOrder com os dados
+    console.log(table._id)
     navigate("/new-order", {
       state: {
+        tableId: table._id,
         table: table.tableNumber,
         numPerson: table.quantity,
       },
@@ -63,7 +65,7 @@ export default function SelectTablePopUp({ onClose }) {
             </div>
           </>
         ) : (
-          <div>You do not have tables yet</div>
+          <div>Você não tem mesas ainda!</div>
         )}
         {newTable ? (
           <OrderPopUp onClose={closePopUp} table={tableSelected} />

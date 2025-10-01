@@ -4,34 +4,45 @@ import { Dialog, TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useTable from "../../services/useTable";
 
-export default function OrderPopUp({table, onClose }) {
+export default function OrderPopUp({ table, onClose }) {
   const navigate = useNavigate();
   const { AddTable } = useTable();
   const authData = JSON.parse(localStorage.getItem("auth"));
 
   const [formData, setFormData] = useState({
     mesa: table,
-    quant_pessoas: ""
+    quant_pessoas: "",
   });
 
   const handleFormDataChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmitForm = (e) => {
-    e.preventDefault();
-    AddTable(authData.user._id, formData.mesa, formData.quant_pessoas)
-    // Navega para a página NewOrder com os dados
+const handleSubmitForm = async (e) => {
+  e.preventDefault();
+
+  try {
+    const newTable = await AddTable(
+      authData.user._id,
+      formData.mesa,
+      formData.quant_pessoas
+    );
+
     navigate("/new-order", {
       state: {
+        tableId: newTable.insertedId,   // agora vem do backend certinho
         table: formData.mesa,
-        numPerson: formData.quant_pessoas
-      }
+        numPerson: formData.quant_pessoas,
+      },
     });
-  };
+  } catch (err) {
+    console.error("Erro ao criar mesa:", err);
+  }
+};
+
 
   return (
     <Dialog open={true} onClose={onClose}>

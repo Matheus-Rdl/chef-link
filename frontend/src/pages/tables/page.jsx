@@ -2,6 +2,7 @@ import styles from "./page.module.css";
 import useTable from "../../services/useTable";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import NavSideBar from "../../components/navSideBar/navSideBar";
 
 export default function Tables() {
   const { getTablesList, tablesList, refetchTables, tableLoading } = useTable();
@@ -20,13 +21,14 @@ export default function Tables() {
 
   return (
     <div className={`${styles.tablePageContainer} pageContainer`}>
+      <NavSideBar/>
       <h1>Tables</h1>
       {tablesList.length > 0 ? (
         <>
           <button>Adicionar mesa</button>
           <div className={styles.tablesContainer}>
             {tablesList.map((table) => (
-              <Link to={`/orders/${table._id}`} key={table._id}>
+              <Link to={`/orders/${table._id}/${table.quantity}`} key={table._id}>
                 <div className={styles.tableContainer}>
                   <p>Mesa: {table.tableNumber}</p>
                   <p>Quant. de pessoas: {table.quantity}</p>
@@ -36,7 +38,7 @@ export default function Tables() {
           </div>
         </>
       ) : (
-        <div>You do not have tables yet</div>
+        <div>Você não tem mesas ainda!</div>
       )}
     </div>
   );

@@ -2,13 +2,16 @@
   display: flex;
   align-items: center;
   background-color: #004643;
-  height: 96px;
+  height: 82px;
+  width: 95%;
   justify-content: space-between;
   padding-right: 5%;
+  z-index: 2;
+  position: fixed;
 }
 
 .logo {
-  width: 5em;
+  width: 3.6em;
 }
 
 .navbarBtns {

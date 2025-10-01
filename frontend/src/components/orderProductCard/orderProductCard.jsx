@@ -21,7 +21,7 @@ export default function OrderProductCard({ productData, checked, onToggle }) {
           <h4>R$ {productData.price}</h4>
           <Checkbox
             sx={{
-              width: 175,
+              width: 50,
               height: 50,
               "& .MuiSvgIcon-root": { fontSize: 42 },
               color: "#fff", // cor do box quando desmarcado

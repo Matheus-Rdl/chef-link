@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../services/useAuth";
 import { Button } from "@mui/material";
+import NavSideBar from "../../components/navSideBar/navSideBar";
 
 export default function Profile() {
   const { logout } = useAuth();
@@ -23,6 +24,7 @@ export default function Profile() {
 
   return (
     <div className="pageContainer">
+      <NavSideBar/>
       <div className={styles.profilePageContainer}>
         <h1>Profile</h1>
         <h3>{authData?.user?.username}</h3>
