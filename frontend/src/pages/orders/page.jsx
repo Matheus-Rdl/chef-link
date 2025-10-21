@@ -20,7 +20,7 @@ export default function Orders() {
       return (
         accOrder +
         order.orderItems.reduce((accItem, item) => {
-          return accItem + (item.itemDetails[0]?.price || 0);
+          return accItem + (item.itemDetails[0]?.price * (item.quantity) || 0);
         }, 0)
       );
     }, 0);
@@ -42,18 +42,21 @@ export default function Orders() {
         <div className={styles.ordersContainer}>
           {ordersList.map((order) => (
             <div className={styles.orderCard}>
-              <p>{order.pickupStatus}</p>
+              <p>{order.createdAt}</p>
               {order.orderItems.map((items) => (
                 <div key={items._id}>
                   <p>
                     <span className={styles.orderName}>
                       {items.itemDetails[0].name}
                     </span>
-                    <span className={styles.orderQuantity}>
-                      {items.quantity}
-                    </span>
                     <span className={styles.orderPrice}>
-                      R$ {items.itemDetails[0].price}
+                      R$ {(items.itemDetails[0].price).toFixed(2)}
+                    </span>
+                    <span className={styles.orderQuantity}>
+                      {items.quantity}x
+                    </span>
+                    <span className={styles.orderItemTotalPrice}>
+                      R$ {(items.itemDetails[0].price * items.quantity).toFixed(2)}
                     </span>
                   </p>
                 </div>

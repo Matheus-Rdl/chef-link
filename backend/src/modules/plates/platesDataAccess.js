@@ -39,13 +39,15 @@ export default class PlatesDataAccess {
     }
 
     async updatePlate(plateId, plateData){
-            const result = Mongo.db
-            .collection(collectionName)
-            .findOneAndUpdate(
-                {_id: new ObjectId(plateId) },
-                { $set: plateData }    
-            )
-    
-            return result
-    }
+        const result = await Mongo.db
+        .collection(collectionName)
+        .findOneAndUpdate(
+            { _id: new ObjectId(plateId) },
+            { $set: plateData },
+            { returnDocument: "after" } // Retorna o documento atualizado
+        )
+
+    return result
+}
+
 }

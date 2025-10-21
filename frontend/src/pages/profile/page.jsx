@@ -21,15 +21,19 @@ export default function Profile() {
     navigate("/auth");
   };
 
-
   return (
     <div className="pageContainer">
-      <NavSideBar/>
+      <NavSideBar />
       <div className={styles.profilePageContainer}>
-        <h1>Profile</h1>
-        <h3>{authData?.user?.username}</h3>
-        <h3>{authData?.user?.fullname}</h3>
-        <Button onClick={handleLogout}>LogOut</Button>
+        <div>
+          <h1>Profile</h1>
+          <h3>{authData?.user?.username}</h3>
+          <h3>{authData?.user?.fullname}</h3>
+          <Button onClick={handleLogout}>LogOut</Button>
+        </div>
+        <div>
+          
+        </div>
       </div>
     </div>
   );

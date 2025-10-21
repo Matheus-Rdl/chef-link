@@ -5,6 +5,10 @@ export default function useAuth() {
 
   const url = "http://localhost:3001/auth";
 
+  const getUsers = () => {
+    
+  }
+
   const login = (formData) => {
     setAuthLoading(true);
 

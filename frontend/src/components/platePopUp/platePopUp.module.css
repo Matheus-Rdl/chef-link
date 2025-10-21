@@ -1,0 +1,46 @@
+.popUpDialog {
+  width: 100%;
+}
+
+.popUpContainer {
+  background-color: #faf0ca;
+  color: #004643;
+  width: 500px;
+}
+
+.popUpContainer img {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.popUpContent {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+}
+
+.popUpContent input,
+.popUpContent textarea {
+  padding: 1em 0.5em;
+}
+
+.ingredients {
+  color: #777777;
+}
+
+/* Smartphones médios (até ~768px) */
+@media screen and (max-width: 768px) {
+  .popUpContainer {
+    width: 400px;
+  }
+}
+
+/* Smartphones pequenos (até ~480px) */
+@media screen and (max-width: 480px) {
+    .popUpContainer {
+    width: auto;
+  }
+}
+

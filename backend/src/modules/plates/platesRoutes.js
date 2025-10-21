@@ -11,7 +11,6 @@ platesRouter.get('/', async(req, res) =>{
     res.status(statusCode).send({success, statusCode, body})
 })
 
-
 platesRouter.post('/', async(req, res) => {
     const { success, statusCode, body } = await platesControllers.addPlate(req.body)
 

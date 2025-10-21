@@ -24,7 +24,7 @@ async function main() {
   });
 
   // Print the connection result (success message or error)
-  //console.log(mongoConnection);
+  console.log(mongoConnection);
 
   // Middleware to parse JSON bodies in requests
   app.use(express.json());
