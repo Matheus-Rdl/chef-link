@@ -10,6 +10,11 @@ tablesRouter.get('/', async(req, res) =>{
 
     res.status(statusCode).send({success, statusCode, body})
 })
+tablesRouter.get('/:tableNumber', async(req, res) =>{
+    const { success, statusCode, body } = await tablesControllers.getTableByNumber(req.params.tableNumber)
+
+    res.status(statusCode).send({success, statusCode, body})
+})
 
 
 tablesRouter.post('/', async(req, res) => {

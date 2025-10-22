@@ -154,6 +154,7 @@
     justify-content: flex-start;
   }
 }
+
 /* Smartphones médios (até ~768px) */
 @media screen and (max-width: 768px) {
   .cartContainerClose {
@@ -184,6 +185,22 @@
   .closeCart {
     display: block;
   }
-  .cartContainer h4 {margin-inline: 1.5em;
+  .cartContainer h4 {
+    margin-inline: 1.5em;
+  }
+}
+
+/* Smartphones pequenos (até ~480px) */
+@media screen and (max-width: 480px) {
+  .pageContainer h1 {
+    text-align: center;
+    margin: 0;
+    width: 100%;
+  }
+
+  .newOrderInformation {
+    display: flex;
+    margin: 0.2em 0;
+    justify-content: center;
   }
 }

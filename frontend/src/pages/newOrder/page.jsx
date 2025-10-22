@@ -21,7 +21,7 @@ export default function NewOrder() {
   const [screenProducts, setScreenProducts] = useState("Principais"); //o que vai ser mostrado nos menus dos produtos
   const [btnCart, useBtnCart] = useState(false);
 
-  console.log(tableId)
+  //console.log(tableId, table, numPerson)
 
   //leva uma mensagem para o services, a função getAvailablePlates
   useEffect(() => {

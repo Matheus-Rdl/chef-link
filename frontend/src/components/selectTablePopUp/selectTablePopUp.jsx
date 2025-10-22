@@ -25,7 +25,7 @@ export default function SelectTablePopUp({ onClose }) {
   //Abre o novo produto sem criar uma mesa
   const openNewOrder = (table) => {
     // Navega para a página NewOrder com os dados
-    console.log(table._id)
+    //console.log(table._id)
     navigate("/new-order", {
       state: {
         tableId: table._id,

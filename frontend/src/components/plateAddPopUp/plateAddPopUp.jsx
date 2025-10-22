@@ -1,65 +1,49 @@
 import { useState } from "react";
 import { Dialog } from "@mui/material";
-import styles from "./platePopUp.module.css";
+import styles from "./plateAddPopUp.module.css";
 import { adminUser, imgProducts } from "../../../utils/config.js";
 import { convertToBase64 } from "../../../utils/converter.js";
 
-export default function PlatePopUp({
-  plateData,
-  onClose,
-  updatePlate,
-  deletePlate,
-}) {
+export default function PlateAddPopUp({ onClose, addPlate }) {
   // Estados locais para cada campo editável
-  const [name, setName] = useState(plateData.name);
-  const [description, setDescription] = useState(plateData.description);
-  const [price, setPrice] = useState(plateData.price);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
   const [imageFile, setImageFile] = useState(null);
-  const [previewUrl, setPreviewUrl] = useState(plateData.imgUrl || "");
 
   const userAdmin = adminUser();
   const showImgProducts = imgProducts();
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImageFile(file);
-      setPreviewUrl(URL.createObjectURL(file)); // cria URL temporária para preview
-    }
-  };
+  const handleAdd = async () => {
+    let imgUrl = "";
 
-  const handleUpdate = async () => {
-    let imgUrl = plateData.imgUrl;
     if (imageFile) {
       imgUrl = await convertToBase64(imageFile);
+    } else {
+      imgUrl = "";
     }
 
-    const updatedData = {
+    const addData = {
       name,
       description,
-      price: Number(price), // garante que seja número
+      price: Number(price),
       imgUrl,
     };
 
-    const result = await updatePlate(plateData._id, updatedData);
-    if (result?.success) {
-      onClose(); // fecha popup após atualizar
-    }
-  };
-
-  const handleDelete = async () => {
-    if (window.confirm("Tem certeza que deseja deletar este prato?")) {
-      const result = await deletePlate(plateData._id);
-      if (result?.success) {
-        onClose();
-      }
-    }
+    const result = await addPlate(addData);
+    if (result?.success) onClose();
   };
 
   return (
     <Dialog open={true} onClose={onClose} className={styles.popUpDialog}>
       <div className={styles.popUpContainer}>
-        {showImgProducts && <img src={previewUrl} alt={name} />}
+        {showImgProducts && (
+          <div>
+            {imageFile && (
+              <img src={URL.createObjectURL(imageFile)} alt="Preview" />
+            )}
+          </div>
+        )}
         <div className={styles.popUpContent}>
           {userAdmin ? (
             <>
@@ -68,9 +52,10 @@ export default function PlatePopUp({
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={handleFileChange}
+                  onChange={(e) => setImageFile(e.target.files[0])}
                 />
               )}
+
               <input
                 type="text"
                 value={name}
@@ -88,17 +73,14 @@ export default function PlatePopUp({
                 onChange={(e) => setPrice(e.target.value)}
                 placeholder="Preço"
               />
-              <div className={styles.PlatePopUpButtons}>
-                <button onClick={handleUpdate}>Atualizar</button>
+              <button onClick={handleAdd}>Adicionar</button>
+              {/*
+              <button onClick={handleUpdate}>Atualizar</button>
                 <button onClick={handleDelete}>Deletar</button>
-              </div>
+              */}
             </>
           ) : (
-            <>
-              <h1>{name}</h1>
-              <p>{description}</p>
-              <h2>{price}</h2>
-            </>
+            <></>
           )}
         </div>
       </div>

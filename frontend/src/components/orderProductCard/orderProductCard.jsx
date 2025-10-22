@@ -1,7 +1,10 @@
 import { Checkbox } from "@mui/material";
 import styles from "./orderProductCard.module.css";
+import { imgProducts } from "../../../utils/config.js"
 
 export default function OrderProductCard({ productData, checked, onToggle }) {
+  const showImgProducts = imgProducts()
+
   const handleChange = (e) => {
     //Manda para o NewOrders.jsx o item que foi marcado ou desmarcado
     onToggle({
@@ -14,8 +17,12 @@ export default function OrderProductCard({ productData, checked, onToggle }) {
 
   return (
     <>
-      <div className={styles.cardContainer}>
-        <img src={productData.imgUrl} alt={productData.name} />
+      <div className={showImgProducts ? (`${styles.cardContainer}`) : (`${styles.cardContainerNoImg}`)}>
+        {showImgProducts ? (
+          <img src={productData.imgUrl} alt={productData.name} />
+        ) : (
+          ""
+        )}
         <div className={styles.cardContent}>
           <h4>{productData.name}</h4>
           <h4>R$ {productData.price}</h4>

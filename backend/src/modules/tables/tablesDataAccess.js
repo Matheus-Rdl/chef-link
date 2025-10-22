@@ -13,6 +13,14 @@ export default class TablesDataAccess {
         return result
     }
 
+    async getTableByNumber(tableNumber){
+        const result = await Mongo.db
+        .collection(collectionName)
+        .findOne({ tableNumber: tableNumber.toString() })
+
+        return result
+    }
+
     async addTable(tableData){
         const { items, ...tableDataRest } = tableData
 

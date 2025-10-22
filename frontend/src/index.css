@@ -28,26 +28,44 @@ button {
   font-size: medium;
 }
 
-p{
+p {
   display: flex;
   gap: 0.2em;
 }
 
-.pageContainer{
+.pageContainer {
   padding: 0.5em;
-  padding-left: 80px;
+  padding-right: 100px;
   padding-top: 92px;
 }
 
+h1 {
+  margin-bottom: .5em;
+}
+
 /* Smartphones pequenos (até ~480px) */
-@media screen and (max-width: 480px) {}
+@media screen and (max-width: 480px) {
+}
+
+/* Media de celular usado para este projeto */
+@media screen and (max-width: 520px) {
+  .pageContainer {
+    padding-right: 0.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h1 {
+    text-align: center;
+  }
+}
 
 /* Smartphones médios (até ~768px) */
 @media screen and (max-width: 768px) {
   h1 {
     font-size: xx-large;
   }
-    h3 {
+  h3 {
     font-size: x-large;
   }
   h4 {
@@ -56,12 +74,13 @@ p{
 }
 
 /* Tablets (até ~1024px) */
-@media screen and (max-width: 1024px) {}
+@media screen and (max-width: 1024px) {
+}
 
 /* Laptops pequenos (até ~1280px) */
-@media screen and (max-width: 1280px) {}
+@media screen and (max-width: 1280px) {
+}
 
 /* Desktops grandes (até ~1536px ou mais) */
-@media screen and (max-width: 1536px) {}
-
-
+@media screen and (max-width: 1536px) {
+}

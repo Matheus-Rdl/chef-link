@@ -26,7 +26,7 @@ export default function Orders() {
     }, 0);
   }, [ordersList]);
 
-  console.log(ordersList);
+  //console.log(ordersList);
 
   return (
     <div className={`${styles.orderPageContainer} pageContainer`}>
@@ -41,7 +41,7 @@ export default function Orders() {
       {ordersList.length > 0 ? (
         <div className={styles.ordersContainer}>
           {ordersList.map((order) => (
-            <div className={styles.orderCard}>
+            <div className={styles.orderCard} key={order._id}>
               <p>{order.createdAt}</p>
               {order.orderItems.map((items) => (
                 <div key={items._id}>

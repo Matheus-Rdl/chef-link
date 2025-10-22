@@ -15,8 +15,31 @@ export default class TablesControllers {
         }
     }
 
+    async getTableByNumber(tableNumber){
+        try {
+            const tables = await this.dataAccess.getTableByNumber(tableNumber)
+            return ok(tables)
+        } catch (error) {
+            return serverError(error)
+        }
+    }
+
     async addTable(tableData){
         try {
+            const { tableNumber } = tableData
+
+             // Verifica se já existe uma mesa com o mesmo número
+            const existingTable = await this.dataAccess.getTableByNumber(tableNumber)
+
+            if (existingTable) {
+                return {
+                    success: false,
+                    statusCode: 400,
+                    body : { message : `A mesa ${tableNumber} já existe!`}
+                }
+            }
+
+            // Se não existir, cria a nova mesa normalmente
             const result = await this.dataAccess.addTable(tableData)
             return ok(result)
         } catch (error) {

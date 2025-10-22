@@ -33,6 +33,11 @@ export default function usePlates() {
 
   // 🔹 Atualiza um prato existente
   const updatePlate = async (plateId, plateData) => {
+    if (!plateId) {
+      console.error("❌ Erro: plateId não foi informado em updatePlate");
+      return;
+    }
+
     try {
       setPlatesLoading(true);
 
@@ -47,23 +52,18 @@ export default function usePlates() {
       const result = await response.json();
 
       if (result.success) {
-        // Compatibilidade com diferentes formatos de resposta
         const updatedPlate =
           result.body?.value || result.body || result.value || null;
 
         if (updatedPlate) {
-          // Atualiza o estado local imediatamente
           setPlatesList((prev) =>
             prev.map((plate) =>
-              plate && plate._id === plateId
-                ? { ...plate, ...updatedPlate }
-                : plate
+              plate?._id === plateId ? { ...plate, ...updatedPlate } : plate
             )
           );
         }
 
-        // Garante que a lista fique sincronizada com o banco
-        await getPlates();
+        await getPlates(); // garante sincronização
       }
 
       return result;
@@ -74,5 +74,64 @@ export default function usePlates() {
     }
   };
 
-  return { getPlates, platesLoading, refetchPlates, platesList, updatePlate };
+  // 🔹 Adiciona um novo prato
+  const addPlate = async (plateData) => {
+    try {
+      setPlatesLoading(true);
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(plateData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        const newPlate =
+          result.body?.inserted ||
+          result.body?.value ||
+          result.body ||
+          result.value ||
+          null;
+
+        if (newPlate) {
+          setPlatesList((prev) => [...prev, newPlate]);
+        }
+
+        await getPlates();
+      }
+
+      return result;
+    } catch (error) {
+      console.error("Erro ao adicionar prato:", error);
+    } finally {
+      setPlatesLoading(false);
+    }
+  };
+
+  const deletePlate = async (plateId) => {
+    try {
+      const response = await fetch(`${url}/${plateId}`, { method: "DELETE" });
+      const result = await response.json();
+      if (result.success) {
+        setPlatesList((prev) => prev.filter((p) => p._id !== plateId));
+      }
+      return result;
+    } catch (error) {
+      console.error("Erro ao deletar prato:", error);
+    }
+  };
+
+  return {
+    getPlates,
+    platesLoading,
+    refetchPlates,
+    platesList,
+    updatePlate,
+    addPlate,
+    deletePlate
+  };
 }

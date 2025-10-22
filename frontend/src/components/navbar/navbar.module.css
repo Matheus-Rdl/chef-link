@@ -3,15 +3,14 @@
   align-items: center;
   background-color: #004643;
   height: 82px;
-  width: 95%;
-  justify-content: space-between;
-  padding-right: 5%;
+  width: 100%;
+  justify-content: right;
   z-index: 2;
   position: fixed;
 }
 
 .logo {
-  width: 3.6em;
+  width: 86px;
 }
 
 .navbarBtns {
@@ -19,7 +18,7 @@
   justify-content: flex-end;
 }
 
-.navbarIcons{
+.navbarIcons {
   color: #faf0ca;
   font-size: xx-large;
   cursor: pointer;
@@ -36,7 +35,7 @@
   font-size: xx-large;
 }
 
-.drawerBtnClose{
+.drawerBtnClose {
   position: absolute;
   color: #faf0ca;
   font-size: xxx-large;
@@ -54,6 +53,14 @@
   transition: 0.3s;
 }
 
-.navbarLink:hover, .drawerBtnClose:hover, .navbarIcons:hover {
+.navbarLink:hover,
+.drawerBtnClose:hover,
+.navbarIcons:hover {
   transform: scale(1.2);
+}
+
+@media screen and (max-width: 520px) {
+  .navbarContainer {
+    justify-content: left;
+  }
 }
