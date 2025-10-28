@@ -7,15 +7,24 @@ import NavSideBar from "../../components/navSideBar/navSideBar";
 import PlatePopUp from "../../components/platePopUp/platePopUp";
 import { adminUser } from "../../../utils/config.js";
 import PlateAddPopUp from "../../components/plateAddPopUp/plateAddPopUp.jsx";
+import { useNavigate } from "react-router-dom";
+import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 
 export default function Plates() {
-  const { getPlates, platesList, platesLoading, refetchPlates, updatePlate, addPlate, deletePlate } =
-    usePlates();
+  const {
+    getPlates,
+    platesList,
+    platesLoading,
+    refetchPlates,
+    updatePlate,
+    addPlate,
+    deletePlate,
+  } = usePlates();
   const [plateSelected, setPlateSelected] = useState(null);
   const [addPlatePopUp, setAddPlatePopUp] = useState(false);
+  const navigate = useNavigate(); //negação entre telas
 
   const userAdmin = adminUser();
-
 
   //leva uma mensagem para o services, a função getAvailablePlates
   useEffect(() => {
@@ -39,9 +48,14 @@ export default function Plates() {
     setPlateSelected(null);
   };
 
-    //Aciona o PlateAddPopUp
+  //Aciona o PlateAddPopUp
   const handleAddPlatePopUp = () => {
     setAddPlatePopUp(!addPlatePopUp);
+  };
+
+  //Função para voltar a tela
+  const handleBack = () => {
+    navigate("/");
   };
 
   ////console.log(platesList);
@@ -50,12 +64,19 @@ export default function Plates() {
     <div className={`pageContainer`}>
       <NavSideBar />
       <h1>Cardápio</h1>
-      {userAdmin ? (
+      <FaRegArrowAltCircleLeft
+        className={styles.arrowBack}
+        onClick={handleBack}
+      />
+      {userAdmin && (
         <div>
-          <button className={styles.addPlate} onClick={() => handleAddPlatePopUp()}>Adicionar Prato</button>
+          <button
+            className={styles.addPlate}
+            onClick={() => handleAddPlatePopUp()}
+          >
+            Adicionar Prato
+          </button>
         </div>
-        ) : (
-          ""
       )}
       <div className={styles.cardPlatesBox}>
         {platesList?.map((plate) =>
@@ -81,7 +102,7 @@ export default function Plates() {
         />
       )}
 
-      {/*Função responsavel para verificar se um prato vais er adicionado*/}
+      {/*Função responsavel para verificar se um prato vai ser adicionado*/}
       {addPlatePopUp && (
         <PlateAddPopUp
           onClose={() => handleAddPlatePopUp()}

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../../services/useAuth";
 import { Button } from "@mui/material";
 import NavSideBar from "../../components/navSideBar/navSideBar";
+import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 
 export default function Profile() {
   const { logout } = useAuth();
@@ -21,8 +22,17 @@ export default function Profile() {
     navigate("/auth");
   };
 
+  //Função para voltar a tela
+  const handleBack = () => {
+    navigate("/");
+  };
+
   return (
     <div className="pageContainer">
+      <FaRegArrowAltCircleLeft
+        className={styles.arrowBack}
+        onClick={handleBack}
+      />
       <NavSideBar />
       <div className={styles.profilePageContainer}>
         <div>
@@ -31,9 +41,7 @@ export default function Profile() {
           <h3>{authData?.user?.fullname}</h3>
           <Button onClick={handleLogout}>LogOut</Button>
         </div>
-        <div>
-          
-        </div>
+        <div></div>
       </div>
     </div>
   );

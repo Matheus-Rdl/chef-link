@@ -4,6 +4,16 @@
   gap: 0.5em;
 }
 
+.arrowBack {
+  position: absolute;
+  font-size: 1.8em;
+  left: 0;
+  top: 0;
+  margin-top: 92px;
+  margin-left: 0.25em;
+  cursor: pointer;
+}
+
 .tablesContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

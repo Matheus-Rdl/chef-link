@@ -46,8 +46,7 @@
   right: 0;
   height: 200px;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
-  border-bottom-left-radius: 0.5em;
-  border-bottom-right-radius: 0.5em;
+  border-radius: 0.5em;
 }
 
 .price {

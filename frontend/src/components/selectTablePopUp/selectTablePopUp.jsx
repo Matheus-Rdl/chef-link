@@ -40,6 +40,7 @@ export default function SelectTablePopUp({ onClose }) {
     setTableSelected(table);
     setNewTable(true);
   };
+
   const closePopUp = () => {
     setNewTable(null);
   };
@@ -67,9 +68,9 @@ export default function SelectTablePopUp({ onClose }) {
         ) : (
           <div>Você não tem mesas ainda!</div>
         )}
-        {newTable ? (
+        {newTable && (
           <OrderPopUp onClose={closePopUp} table={tableSelected} />
-        ) : null}
+        )}
         <button onClick={() => openPopUp("")}>Adicionar mesa</button>
       </div>
     </Dialog>

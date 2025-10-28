@@ -5,6 +5,16 @@
   margin-top: 1em;
 }
 
+.arrowBack {
+  position: absolute;
+  font-size: 1.8em;
+  left: 0;
+  top: 0;
+  margin-top: 92px;
+  margin-left: 0.25em;
+  cursor: pointer;
+}
+
 .orderCard{
   background-color: #004643;
   color: #faf0ca;

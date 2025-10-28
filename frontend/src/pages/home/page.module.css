@@ -1,0 +1,11 @@
+.buttonsHome {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+@media screen and (max-width: 520px) {
+  .buttonsHome {
+    align-items: center;
+  }
+}

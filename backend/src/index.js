@@ -7,6 +7,8 @@ import usersRouter from "./modules/users/usersRoutes.js";
 import platesRouter from "./modules/plates/platesRoutes.js";
 import tablesRouter from "./modules/tables/tablesRoutes.js";
 import ordersRouter from "./modules/orders/ordersRoutes.js";
+import OrdersDataAccess from "./modules/orders/ordersDataAccess.js";
+import { PrintService } from "./services/usePrint.js";
 
 config(); // Load environment variables from .env into process.env
 
@@ -48,9 +50,25 @@ async function main() {
   app.use("/tables", tablesRouter);
   app.use("/orders", ordersRouter);
 
+  // Iniciar o watch de pedidos - AGORA CORRETO
+  try {
+    const ordersDataAccess = new OrdersDataAccess(); // ← Criar instância
+    await ordersDataAccess.watchOrders(async (change) => {
+      console.log("📊 Mudança detectada:", change.operationType);
+
+      if (change.operationType === "insert") {
+        const newOrder = change.fullDocument;
+        console.log("🆕 NOVO PEDIDO DETECTADO:", newOrder);
+        await PrintService.printOrder(newOrder);
+      }
+    });
+  } catch (error) {
+    console.error("❌ Erro ao iniciar monitoramento:", error);
+  }
+
   // Start the server and listen on the defined port
   app.listen(port, () => {
-    //console.log(`Server running on: http://${hostname}:${port}`);
+    console.log(`Server running on: http://${hostname}:${port}`);
   });
 }
 

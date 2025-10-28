@@ -1,16 +1,11 @@
 import styles from "./navbar.module.css";
-import { LuMenu } from "react-icons/lu";
-import { FaRegUserCircle } from "react-icons/fa";
-import { IoMdCloseCircle } from "react-icons/io";
-import { BiFoodMenu } from "react-icons/bi";
-import { MdOutlineTableRestaurant } from "react-icons/md";
-import { TiHomeOutline } from "react-icons/ti";
-import { Drawer } from "@mui/material";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { getCurrentDate } from "../../../utils/dateFunctions.js";
 
 export default function NavBar() {
-  const [openMenu, setOpenMenu] = useState(false);
+  const authData = JSON.parse(localStorage.getItem("auth"));
+  console.log(authData ? "true" : "false");
+  console.log(authData);
+  const formattedDate = getCurrentDate();
 
   const handleOpenMenu = () => {
     setOpenMenu(!openMenu);
@@ -19,38 +14,14 @@ export default function NavBar() {
   return (
     <>
       <nav className={styles.navbarContainer}>
+        <div className={styles.navbarItems}>
+          <p>{formattedDate}</p>
+          {authData && <p>{authData.user.username}</p>}
+        </div>
         <div className={styles.navBarInformation}>
           <img className={styles.logo} src="/logo.png" alt="" />
         </div>
-        <div className={styles.navbarItems}>
-          {/*<LuMenu className={styles.navbarIcons} onClick={handleOpenMenu} />*/}
-        </div>
       </nav>
-
-      <Drawer anchor="right" open={openMenu} onClose={handleOpenMenu}>
-        <IoMdCloseCircle
-          className={styles.drawerBtnClose}
-          onClick={handleOpenMenu}
-        />
-        <div className={styles.drawer}>
-          <Link onClick={handleOpenMenu} to={"/"} className={styles.navbarLink}>
-            <TiHomeOutline/>
-            Home
-          </Link>
-          <Link onClick={handleOpenMenu} to={"/tables"} className={styles.navbarLink}>
-            <MdOutlineTableRestaurant/>
-            Tables
-          </Link>
-          <Link onClick={handleOpenMenu} to={"/plates"} className={styles.navbarLink}>
-            <BiFoodMenu/>
-            Plates
-          </Link>
-          <Link onClick={handleOpenMenu} to={"/profile"} className={styles.navbarLink}>
-            <FaRegUserCircle/>
-            Profile
-          </Link>
-        </div>
-      </Drawer>
     </>
   );
 }

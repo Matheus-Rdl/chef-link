@@ -3,9 +3,11 @@ import styles from "./page.module.css";
 import OrderPopUp from "../../components/orderPopUp/orderPopUp";
 import SelectTablePopUp from "../../components/selectTablePopUp/selectTablePopUp";
 import NavSideBar from "../../components/navSideBar/navSideBar";
+import { adminUser } from "../../../utils/config.js";
 
 export default function Home() {
   const [selectTable, setSelectTable] = useState(null);
+  const userAdmin = adminUser();
 
   const handleSelectTable = () => {
     setSelectTable(true);
@@ -18,19 +20,25 @@ export default function Home() {
   return (
     <div className={`pageContainer`}>
       <>
-        <NavSideBar/>
+        <NavSideBar />
         <h1>Home</h1>
-        <button
-          onClick={() => {
-            handleSelectTable();
-          }}
-        >
-          Novo Pedido
-        </button>
+        <div className={styles.buttonsHome}>
+          <button
+            onClick={() => {
+              handleSelectTable();
+            }}
+          >
+            Novo Pedido
+          </button>
 
-        {selectTable ? (
-          <SelectTablePopUp onClose={handleClosePopUp}/>
-        ) : null}
+          {userAdmin && (
+            <div>
+              <button>Relatórios</button>
+            </div>
+          )}
+        </div>
+
+        {selectTable ? <SelectTablePopUp onClose={handleClosePopUp} /> : null}
       </>
     </div>
   );

@@ -4,6 +4,7 @@ import { ObjectId } from "mongodb";
 const collectionName = 'orders'
 
 export default class OrdersDataAccess {
+
     async getOrders(){
         const result = await Mongo.db
         .collection(collectionName)
@@ -136,6 +137,24 @@ export default class OrdersDataAccess {
         .insertMany(items)
 
         return result
+    }
+
+    async watchOrders(onChange) {
+        try {
+            const collection = Mongo.db.collection(collectionName);
+            const changeStream = collection.watch(); // ← Faltou .watch() aqui
+            
+            changeStream.on("change", (change) => {
+                console.log("📊 Mudança no pedido:", change.operationType);
+                onChange(change);
+            });
+            
+            console.log("👀 Monitorando pedidos...");
+            return changeStream;
+        } catch (error) {
+            console.error("❌ Erro no watchOrders:", error);
+            throw error;
+        }
     }
 
     async deleteOrder(orderId){
